@@ -25,28 +25,31 @@ class TimerForm extends Component{
       <>
         <form onSubmit={this.handleSubmit}>
 
-        <input  type="number" 
-                min="0" 
-                onChange={(event)=>this.handleChange(event, 'hours')} 
-                value={this.state.hours}
-                placeholder="hours" 
-        />
+          <input  type="number" 
+                  min="0" 
+                  max="23"
+                  onChange={(event)=>this.handleChange(event, 'hours')} 
+                  value={this.state.hours}
+                  placeholder="hours" 
+          />
 
-        <input  type="number" 
-                min="0" 
-                onChange={(event)=>this.handleChange(event, 'minutes')} 
-                value={this.state.minutes}
-                placeholder="minutes" 
-        />
+          <input  type="number" 
+                  min="0" 
+                  max="59"
+                  onChange={(event)=>this.handleChange(event, 'minutes')} 
+                  value={this.state.minutes}
+                  placeholder="minutes" 
+          />
 
-        <input  type="number" 
-                min="0" 
-                onChange={(event)=>this.handleChange(event, 'seconds')} 
-                value={this.state.seconds}
-                placeholder="seconds" 
-        />
+          <input  type="number" 
+                  min="0" 
+                  max="59"
+                  onChange={(event)=>this.handleChange(event, 'seconds')} 
+                  value={this.state.seconds}
+                  placeholder="seconds" 
+          />
 
-        <button type="submit">Start Countdown</button>
+          <button type="submit">Start Countdown</button>
         </form>
       </>
     )
