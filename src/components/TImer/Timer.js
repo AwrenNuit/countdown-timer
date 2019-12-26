@@ -15,26 +15,53 @@ class Timer extends Component{
       minutes: this.props.reduxState.minutes < 10 ? "0"+this.props.reduxState.minutes : this.props.reduxState.minutes,
       seconds: this.props.reduxState.seconds < 10 ? "0"+this.props.reduxState.seconds : this.props.reduxState.seconds,
     });
+    this.countdown(this.millis());
   }
-  // const start  = Date.now();
 
-  // console.log('starting timer...');
+  convert = (stop) => {
+    let start = new Date().getTime();
+    // let hours, minutes, seconds;
+    
+    let timeRemaining = parseInt((stop - start) / 1000);
 
-  // setTimeout(()=>{
-  //   const millis = Date.now() - start;
-  //   console.log(`seconds elapsed = ${Math.floor(millis/1000)}`);
-  // }, 2000);
+    // if (timeRemaining >= 0) {
+      // days = parseInt(timeRemaining / 86400);
+      // timeRemaining = (timeRemaining % 86400);
+      
+    //   hours = parseInt(timeRemaining / 3600);
+    //   timeRemaining = (timeRemaining % 3600);
+      
+    //   minutes = parseInt(timeRemaining / 60);
+    //   timeRemaining = (timeRemaining % 60);
+      
+    //   seconds = parseInt(timeRemaining);
+    // }
 
-  // const millis = seconds * 1000;
-  // const seconds = minutes * 60;
-  // const minutes = hours * 60;
+    return timeRemaining;
+
+  }
+
+  countdown = (stop) => {
+    stop = new Date(stop).getTime();
+
+    setInterval(this.convert(), 1000);
+    this.convert(stop);
+  }
+
+  millis = () => {
+    let total = 0;
+    total += this.props.reduxState.hours * 3600000;
+    total += this.props.reduxState.minutes * 60000;
+    total += this.props.reduxState.seconds * 1000;
+    return total;
+  }
 
   render(){
     return(
       <>
         {JSON.stringify(this.state)}
         {JSON.stringify(this.props.reduxState)}
-        <div>Timer starting: </div>
+        <div>Timer remaining: {this.state.hours}:{this.state.minutes}:{this.state.seconds}</div>
       </>
     )
   }
