@@ -8,11 +8,7 @@ import logger from 'redux-logger';
 
 const setTimerReducer = (state=[], action) => {
   if(action.type === `SET_TIME`){
-    let total = 0;
-    total += action.payload.hours * 3600000;
-    total += action.payload.minutes * 60000;
-    total += action.payload.seconds * 1000;
-    return total;
+    return action.payload;
   }
   return state;
 }

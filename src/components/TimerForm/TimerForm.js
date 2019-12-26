@@ -10,19 +10,22 @@ class TimerForm extends Component{
   }
 
   handleChange = (event, propName)=>{
-    this.state({
+    this.setState({
       ...this.state,
       [propName]: event.target.value
     });
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     this.props.dispatch({type: `SET_TIME`, payload: this.state});
+    this.props.history.push('/timer');
   }
 
   render(){
     return(
       <>
+        {JSON.stringify(this.state)}
         <form onSubmit={this.handleSubmit}>
 
           <input  type="number" 
@@ -50,6 +53,7 @@ class TimerForm extends Component{
           />
 
           <button type="submit">Start Countdown</button>
+
         </form>
       </>
     )
