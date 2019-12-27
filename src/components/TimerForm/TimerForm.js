@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 class TimerForm extends Component{
 
   state = {
+    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
@@ -12,7 +13,7 @@ class TimerForm extends Component{
   handleChange = (event, propName)=>{
     this.setState({
       ...this.state,
-      [propName]: event.target.value
+      [propName]: +event.target.value
     });
   }
 
@@ -27,6 +28,14 @@ class TimerForm extends Component{
       <>
         {JSON.stringify(this.state)}
         <form onSubmit={this.handleSubmit}>
+
+          <input  type="number" 
+                  min="0" 
+                  max="364"
+                  onChange={(event)=>this.handleChange(event, 'days')} 
+                  value={this.state.days}
+                  placeholder="days" 
+          />
 
           <input  type="number" 
                   min="0" 
