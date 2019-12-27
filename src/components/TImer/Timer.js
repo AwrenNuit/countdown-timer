@@ -40,7 +40,7 @@ class Timer extends Component{
       if(seconds <= 0 && minutes <= 0 && hours <= 0 && days <= 0){
         seconds = 0;
       }
-      else if(seconds <= 0){
+      else if(seconds < 0){
         seconds = 59;
         minutes--;
       }
@@ -49,7 +49,7 @@ class Timer extends Component{
       if(minutes <= 0 && hours <= 0 && days <= 0){
         minutes = 0;
       }
-      else if(minutes <= 0){
+      else if(seconds === 59 && minutes <= 0){
         minutes = 59;
         hours--;
       }
@@ -58,7 +58,7 @@ class Timer extends Component{
       if(hours <= 0 && days <= 0){
         hours = 0;
       }
-      else if(hours <= 0){
+      else if(seconds === 59 && minutes === 59 && hours <= 0){
         hours = 23;
         days--;
       }
