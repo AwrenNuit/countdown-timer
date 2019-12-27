@@ -37,7 +37,7 @@ class Timer extends Component{
       seconds--;
 
       // Handle seconds change
-      if(seconds <= 0 && minutes <= 0){
+      if(seconds <= 0 && minutes <= 0 && hours <= 0 && days <= 0){
         seconds = 0;
       }
       else if(seconds <= 0){
@@ -46,7 +46,7 @@ class Timer extends Component{
       }
 
       // Handle minutes change
-      if(minutes <= 0 && hours <= 0){
+      if(minutes <= 0 && hours <= 0 && days <= 0){
         minutes = 0;
       }
       else if(minutes <= 0){
