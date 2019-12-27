@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class TimerForm extends Component{
 
@@ -12,6 +13,9 @@ class TimerForm extends Component{
   }
 
   handleChange = (event, propName)=>{
+    if(isNaN(event.target.value)){
+      event.target.value = 0;
+    }
     if(propName === 'days' && event.target.value > 364){
       event.target.value = 364;
     }
@@ -43,15 +47,42 @@ class TimerForm extends Component{
         <h1>SET TIMER</h1>
         <form onSubmit={this.handleSubmit}>
 
-          <TextField type="number" min="0" max="364" onChange={(event)=>this.handleChange(event, 'days')} value={this.state.days} id="outlined-basic" label="Days" variant="outlined" />
-          <TextField type="number" min="0" max="23" onChange={(event)=>this.handleChange(event, 'hours')} value={this.state.hours} id="outlined-basic" label="Hours" variant="outlined" />
-          <TextField type="number" min="0" max="59" onChange={(event)=>this.handleChange(event, 'minutes')} value={this.state.minutes} id="outlined-basic" label="Minutes" variant="outlined" />
-          <TextField type="number" onChange={(event)=>this.handleChange(event, 'seconds')} value={this.state.seconds} id="outlined-basic" label="Seconds" variant="outlined" />
+          <TextField  type="text" 
+                      onChange={(event)=>this.handleChange(event, 'days')} 
+                      value={this.state.days} 
+                      id="standard-basic" 
+                      label="Days" 
+                      style={{width:"50px",margin:"10px"}} 
+          />
+
+          <TextField  type="number" 
+                      onChange={(event)=>this.handleChange(event, 'hours')} 
+                      value={this.state.hours} 
+                      id="standard-basic" 
+                      label="Hours" 
+                      style={{width:"50px",margin:"10px"}} 
+          />
+
+          <TextField  type="number" 
+                      onChange={(event)=>this.handleChange(event, 'minutes')} 
+                      value={this.state.minutes} 
+                      id="standard-basic" 
+                      label="Minutes" 
+                      style={{width:"50px",margin:"10px"}}      
+          />
+          
+          <TextField  type="number" 
+                      onChange={(event)=>this.handleChange(event, 'seconds')} 
+                      value={this.state.seconds} 
+                      id="standard-basic" 
+                      label="Seconds" 
+                      style={{width:"50px",margin:"10px"}} 
+          />
 
           <br />
           <br />
 
-          <button type="submit">Start Countdown</button>
+          <Button type="submit" variant="outlined">Start Countdown</Button>
 
         </form>
       </div>

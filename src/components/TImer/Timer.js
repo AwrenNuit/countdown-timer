@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-
+import Button from '@material-ui/core/Button';
 
 class Timer extends Component{
 
@@ -105,7 +105,7 @@ class Timer extends Component{
         </div>
 
         <Link to="/">
-          <button className="reset-btn">Set Timer</button>
+          <Button variant="outlined">Set Timer</Button>
         </Link>
 
       </div>
