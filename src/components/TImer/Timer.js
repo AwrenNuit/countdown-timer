@@ -15,52 +15,47 @@ class Timer extends Component{
       minutes: this.props.reduxState.minutes < 10 ? "0"+this.props.reduxState.minutes : this.props.reduxState.minutes,
       seconds: this.props.reduxState.seconds < 10 ? "0"+this.props.reduxState.seconds : this.props.reduxState.seconds,
     });
-    this.countdown(this.millis());
+    this.countdown();
   }
 
-  convert = (stop) => {
-    let start = new Date().getTime();
-    // let hours, minutes, seconds;
-    
-    let timeRemaining = parseInt((stop - start) / 1000);
+  countdown = () => {
 
-    // if (timeRemaining >= 0) {
-      // days = parseInt(timeRemaining / 86400);
-      // timeRemaining = (timeRemaining % 86400);
-      
-    //   hours = parseInt(timeRemaining / 3600);
-    //   timeRemaining = (timeRemaining % 3600);
-      
-    //   minutes = parseInt(timeRemaining / 60);
-    //   timeRemaining = (timeRemaining % 60);
-      
-    //   seconds = parseInt(timeRemaining);
-    // }
+    const calcTimeLeft = () => {
+      let now = new Date();
+      let stop = new Date("2020-01-01");
+      let timeDiff = (stop - now) / 1000;
+      let remaining = {};
+  
+      if (timeDiff > 0) {
+        remaining = {
+          hours: Math.floor((timeDiff % 86400) / 3600) < 10 ? "0"+Math.floor((timeDiff % 86400) / 3600) : Math.floor((timeDiff % 86400) / 3600),
+          minutes: Math.floor((timeDiff % 3600) / 60) < 10 ? "0"+Math.floor((timeDiff % 3600) / 60) : Math.floor((timeDiff % 3600) / 60),
+          seconds: Math.floor(timeDiff % 60) < 10 ? "0"+Math.floor(timeDiff % 60) : Math.floor(timeDiff % 60)
+        };
 
-    return timeRemaining;
+        this.setState(remaining);
+      }
+      return remaining;
+    }
+
+    setInterval(calcTimeLeft(), 1000);
 
   }
 
-  countdown = (stop) => {
-    stop = new Date(stop).getTime();
 
-    setInterval(this.convert(), 1000);
-    this.convert(stop);
-  }
-
-  millis = () => {
-    let total = 0;
-    total += this.props.reduxState.hours * 3600000;
-    total += this.props.reduxState.minutes * 60000;
-    total += this.props.reduxState.seconds * 1000;
-    return total;
-  }
+  // millis = () => {
+  //   let total = 0;
+  //   total += this.props.reduxState.hours * 3600000;
+  //   total += this.props.reduxState.minutes * 60000;
+  //   total += this.props.reduxState.seconds * 1000;
+  //   return total;
+  // }
 
   render(){
     return(
       <>
         {JSON.stringify(this.state)}
-        {JSON.stringify(this.props.reduxState)}
+        {/* {JSON.stringify(this.props.reduxState)} */}
         <div>Timer remaining: {this.state.hours}:{this.state.minutes}:{this.state.seconds}</div>
       </>
     )
