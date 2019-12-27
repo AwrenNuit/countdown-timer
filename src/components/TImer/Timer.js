@@ -9,16 +9,19 @@ class Timer extends Component{
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   }
 
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     this.setState(this.props.reduxState);
   }
 
   componentDidMount(){
-    this.countdown();
     this.interval = setInterval(() => this.countdown(), 1000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval)
   }
 
   countdown = () => {
@@ -33,6 +36,7 @@ class Timer extends Component{
 
       seconds--;
 
+      // Handle seconds change
       if(seconds <= 0 && minutes <= 0){
         seconds = 0;
       }
@@ -41,6 +45,7 @@ class Timer extends Component{
         minutes--;
       }
 
+      // Handle minutes change
       if(minutes <= 0 && hours <= 0){
         minutes = 0;
       }
@@ -49,6 +54,7 @@ class Timer extends Component{
         hours--;
       }
 
+      // Handle hours change
       if(hours <= 0 && days <= 0){
         hours = 0;
       }
@@ -90,20 +96,19 @@ class Timer extends Component{
 
   render(){
     return(
-      <>
-        {JSON.stringify(this.state)}
-        {JSON.stringify(this.props.reduxState)}
-        <div>Timer remaining: 
-          {this.state.days < 10 ? "0"+this.state.days : this.state.days}:
-          {this.state.hours < 10 ? "0"+this.state.hours : this.state.hours}:
-          {this.state.minutes < 10 ? "0"+this.state.minutes : this.state.minutes}:
-          {this.state.seconds < 10 ? "0"+this.state.seconds : this.state.seconds}
+      <div className="countdown-container">
+        <div className="countdown">
+          {this.state.days < 10 ? "0"+this.state.days : this.state.days}d:
+          {this.state.hours < 10 ? "0"+this.state.hours : this.state.hours}h:
+          {this.state.minutes < 10 ? "0"+this.state.minutes : this.state.minutes}m:
+          {this.state.seconds < 10 ? "0"+this.state.seconds : this.state.seconds}s
         </div>
 
         <Link to="/">
-          <button>RESET</button>
+          <button className="reset-btn">Set Timer</button>
         </Link>
-      </>
+
+      </div>
     )
   }
 }

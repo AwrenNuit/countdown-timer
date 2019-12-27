@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import TextField from '@material-ui/core/TextField';
 
 class TimerForm extends Component{
 
@@ -11,6 +12,19 @@ class TimerForm extends Component{
   }
 
   handleChange = (event, propName)=>{
+    if(propName === 'days' && event.target.value > 364){
+      event.target.value = 364;
+    }
+    if(propName === 'hours' && event.target.value > 23){
+      event.target.value = 23;
+    }
+    if(propName === 'minutes' && event.target.value > 59){
+      event.target.value = 59;
+    }
+    if(propName === 'seconds' && event.target.value > 59){
+      event.target.value = 59;
+    }
+
     this.setState({
       ...this.state,
       [propName]: +event.target.value
@@ -25,46 +39,22 @@ class TimerForm extends Component{
 
   render(){
     return(
-      <>
-        {JSON.stringify(this.state)}
+      <div className="form">
+        <h1>SET TIMER</h1>
         <form onSubmit={this.handleSubmit}>
 
-          <input  type="number" 
-                  min="0" 
-                  max="364"
-                  onChange={(event)=>this.handleChange(event, 'days')} 
-                  value={this.state.days}
-                  placeholder="days" 
-          />
+          <TextField type="number" min="0" max="364" onChange={(event)=>this.handleChange(event, 'days')} value={this.state.days} id="outlined-basic" label="Days" variant="outlined" />
+          <TextField type="number" min="0" max="23" onChange={(event)=>this.handleChange(event, 'hours')} value={this.state.hours} id="outlined-basic" label="Hours" variant="outlined" />
+          <TextField type="number" min="0" max="59" onChange={(event)=>this.handleChange(event, 'minutes')} value={this.state.minutes} id="outlined-basic" label="Minutes" variant="outlined" />
+          <TextField type="number" onChange={(event)=>this.handleChange(event, 'seconds')} value={this.state.seconds} id="outlined-basic" label="Seconds" variant="outlined" />
 
-          <input  type="number" 
-                  min="0" 
-                  max="23"
-                  onChange={(event)=>this.handleChange(event, 'hours')} 
-                  value={this.state.hours}
-                  placeholder="hours" 
-          />
-
-          <input  type="number" 
-                  min="0" 
-                  max="59"
-                  onChange={(event)=>this.handleChange(event, 'minutes')} 
-                  value={this.state.minutes}
-                  placeholder="minutes" 
-          />
-
-          <input  type="number" 
-                  min="0" 
-                  max="59"
-                  onChange={(event)=>this.handleChange(event, 'seconds')} 
-                  value={this.state.seconds}
-                  placeholder="seconds" 
-          />
+          <br />
+          <br />
 
           <button type="submit">Start Countdown</button>
 
         </form>
-      </>
+      </div>
     )
   }
 }

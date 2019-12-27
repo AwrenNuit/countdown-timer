@@ -1,0 +1,25 @@
+body{
+  height: 100vh;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+h1 {
+  text-decoration: underline;
+}
+
+.form {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.countdown-container{
+  text-align: center;
+  margin-top: 30%;
+}
+
+.countdown {
+  font-size: 4em;
+}
+
+.reset-btn{
+}
