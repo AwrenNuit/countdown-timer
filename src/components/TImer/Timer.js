@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 class Timer extends Component{
 
   state = {
+    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
@@ -11,11 +12,13 @@ class Timer extends Component{
 
   componentDidMount(){
     this.setState({
+      days: this.props.reduxState.days < 10 ? "0"+this.props.reduxState.days : this.props.reduxState.days,
       hours: this.props.reduxState.hours < 10 ? "0"+this.props.reduxState.hours : this.props.reduxState.hours,
       minutes: this.props.reduxState.minutes < 10 ? "0"+this.props.reduxState.minutes : this.props.reduxState.minutes,
       seconds: this.props.reduxState.seconds < 10 ? "0"+this.props.reduxState.seconds : this.props.reduxState.seconds,
     });
     this.countdown();
+    this.interval = setInterval(() => this.countdown(), 1000);
   }
 
   countdown = () => {
@@ -28,35 +31,23 @@ class Timer extends Component{
   
       if (timeDiff > 0) {
         remaining = {
+          days: Math.floor(timeDiff / 86400) < 10 ? "0"+Math.floor(timeDiff / 86400) : Math.floor(timeDiff / 86400),
           hours: Math.floor((timeDiff % 86400) / 3600) < 10 ? "0"+Math.floor((timeDiff % 86400) / 3600) : Math.floor((timeDiff % 86400) / 3600),
           minutes: Math.floor((timeDiff % 3600) / 60) < 10 ? "0"+Math.floor((timeDiff % 3600) / 60) : Math.floor((timeDiff % 3600) / 60),
           seconds: Math.floor(timeDiff % 60) < 10 ? "0"+Math.floor(timeDiff % 60) : Math.floor(timeDiff % 60)
         };
-
         this.setState(remaining);
       }
-      return remaining;
     }
-
     setInterval(calcTimeLeft(), 1000);
-
   }
-
-
-  // millis = () => {
-  //   let total = 0;
-  //   total += this.props.reduxState.hours * 3600000;
-  //   total += this.props.reduxState.minutes * 60000;
-  //   total += this.props.reduxState.seconds * 1000;
-  //   return total;
-  // }
 
   render(){
     return(
       <>
         {JSON.stringify(this.state)}
-        {/* {JSON.stringify(this.props.reduxState)} */}
-        <div>Timer remaining: {this.state.hours}:{this.state.minutes}:{this.state.seconds}</div>
+        {JSON.stringify(this.props.reduxState)}
+        <div>Timer remaining: {this.state.days}:{this.state.hours}:{this.state.minutes}:{this.state.seconds}</div>
       </>
     )
   }
