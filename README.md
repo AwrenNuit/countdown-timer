@@ -1,6 +1,8 @@
 # Countdown Timer
 
 ## Description
+Duration: one day
+
 This app is a basic countdown timer. Users can enter how many days, hours, minutes, and/or seconds to countdown to. The START COUNTDOWN button is clicked, rendering the actual countdown timer. The SET TIMER button can be clicked to return the user to the set timer page so they can set a new countdown.
 
 ## Technologies Used
