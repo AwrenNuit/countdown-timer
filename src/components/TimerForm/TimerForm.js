@@ -55,7 +55,7 @@ class TimerForm extends Component{
                       style={{width:"50px",margin:"10px"}} 
           />
 
-          <TextField  type="number" 
+          <TextField  type="text" 
                       onChange={(event)=>this.handleChange(event, 'hours')} 
                       value={this.state.hours} 
                       id="standard-basic" 
@@ -63,7 +63,7 @@ class TimerForm extends Component{
                       style={{width:"50px",margin:"10px"}} 
           />
 
-          <TextField  type="number" 
+          <TextField  type="text" 
                       onChange={(event)=>this.handleChange(event, 'minutes')} 
                       value={this.state.minutes} 
                       id="standard-basic" 
@@ -71,7 +71,7 @@ class TimerForm extends Component{
                       style={{width:"50px",margin:"10px"}}      
           />
           
-          <TextField  type="number" 
+          <TextField  type="text" 
                       onChange={(event)=>this.handleChange(event, 'seconds')} 
                       value={this.state.seconds} 
                       id="standard-basic" 
