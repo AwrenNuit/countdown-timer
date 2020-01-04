@@ -13,7 +13,7 @@ This app is a basic countdown timer. Users can enter how many days, hours, minut
 
 ## Future Plans
 - Get rid of input up/down arrows
-- Improve styling, add Dark Mode
 - Add ability to countdown from a calendar date
+- Create theme toggle for Material-UI components
 
 If you have questions or concerns, email me at awren.nuit@gmail.com
