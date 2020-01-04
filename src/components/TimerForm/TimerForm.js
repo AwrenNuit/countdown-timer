@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 class TimerForm extends Component{
 
@@ -9,7 +10,14 @@ class TimerForm extends Component{
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
+    dark: false
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.theme !== prevProps.theme){
+      this.setState({dark: this.props.theme});
+    }
   }
 
   handleChange = (event, propName)=>{
@@ -43,51 +51,58 @@ class TimerForm extends Component{
 
   render(){
     return(
-      <div className="form">
-        <h1>SET TIMER</h1>
-        <form onSubmit={this.handleSubmit}>
+      <div className={this.state.dark ? "dark-mode" : "light-mode"}>
+        <ThemeToggle />
+        <div className="form">
+          <h1>SET TIMER</h1>
+          <form onSubmit={this.handleSubmit}>
 
-          <TextField  type="text" 
-                      onChange={(event)=>this.handleChange(event, 'days')} 
-                      value={this.state.days} 
-                      id="standard-basic" 
-                      label="Days" 
-                      style={{width:"50px",margin:"10px"}} 
-          />
+            <TextField  type="text" 
+                        onChange={(event)=>this.handleChange(event, 'days')} 
+                        value={this.state.days} 
+                        id="standard-basic" 
+                        label="Days" 
+                        style={{width:"50px",margin:"10px"}} 
+            />
 
-          <TextField  type="text" 
-                      onChange={(event)=>this.handleChange(event, 'hours')} 
-                      value={this.state.hours} 
-                      id="standard-basic" 
-                      label="Hours" 
-                      style={{width:"50px",margin:"10px"}} 
-          />
+            <TextField  type="text" 
+                        onChange={(event)=>this.handleChange(event, 'hours')} 
+                        value={this.state.hours} 
+                        id="standard-basic" 
+                        label="Hours" 
+                        style={{width:"50px",margin:"10px"}} 
+            />
 
-          <TextField  type="text" 
-                      onChange={(event)=>this.handleChange(event, 'minutes')} 
-                      value={this.state.minutes} 
-                      id="standard-basic" 
-                      label="Minutes" 
-                      style={{width:"50px",margin:"10px"}}      
-          />
-          
-          <TextField  type="text" 
-                      onChange={(event)=>this.handleChange(event, 'seconds')} 
-                      value={this.state.seconds} 
-                      id="standard-basic" 
-                      label="Seconds" 
-                      style={{width:"50px",margin:"10px"}} 
-          />
+            <TextField  type="text" 
+                        onChange={(event)=>this.handleChange(event, 'minutes')} 
+                        value={this.state.minutes} 
+                        id="standard-basic" 
+                        label="Minutes" 
+                        style={{width:"50px",margin:"10px"}}      
+            />
+            
+            <TextField  type="text" 
+                        onChange={(event)=>this.handleChange(event, 'seconds')} 
+                        value={this.state.seconds} 
+                        id="standard-basic" 
+                        label="Seconds" 
+                        style={{width:"50px",margin:"10px"}} 
+            />
 
-          <br />
-          <br />
+            <br />
+            <br />
 
-          <Button type="submit" variant="outlined">Start Countdown</Button>
+            <Button type="submit" variant="outlined">Start Countdown</Button>
 
-        </form>
+          </form>
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default connect()(TimerForm);
+const putReduxStateOnProps = (reduxState)=>({
+  theme: reduxState.themeToggleReducer
+});
+
+export default connect(putReduxStateOnProps)(TimerForm);

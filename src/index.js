@@ -13,9 +13,17 @@ const setTimerReducer = (state=[], action) => {
   return state;
 }
 
+const themeToggleReducer = (state=false, action) => {
+  if(action.type === `SET_THEME`){
+    return !state;
+  }
+  return state;
+}
+
 const storeInstance = createStore(
   combineReducers({
-      setTimerReducer
+      setTimerReducer,
+      themeToggleReducer
 }),
   applyMiddleware(logger)
 )

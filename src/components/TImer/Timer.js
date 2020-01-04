@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 class Timer extends Component{
 
@@ -10,6 +11,7 @@ class Timer extends Component{
     hours: 0,
     minutes: 0,
     seconds: 0,
+    dark: false
   }
 
   UNSAFE_componentWillMount(){
@@ -18,6 +20,12 @@ class Timer extends Component{
 
   componentDidMount(){
     this.interval = setInterval(() => this.countdown(), 1000);
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.theme !== prevProps.theme){
+      this.setState({dark: this.props.theme});
+    }
   }
 
   componentWillUnmount(){
@@ -96,25 +104,29 @@ class Timer extends Component{
 
   render(){
     return(
-      <div className="countdown-container">
-        <div className="countdown">
-          {this.state.days < 10 ? "0"+this.state.days : this.state.days}d:
-          {this.state.hours < 10 ? "0"+this.state.hours : this.state.hours}h:
-          {this.state.minutes < 10 ? "0"+this.state.minutes : this.state.minutes}m:
-          {this.state.seconds < 10 ? "0"+this.state.seconds : this.state.seconds}s
+      <div className={this.state.dark ? "dark-mode" : "light-mode"}>
+        <ThemeToggle />
+        <div className="countdown-container">
+          <div className="countdown">
+            {this.state.days < 10 ? "0"+this.state.days : this.state.days}d:
+            {this.state.hours < 10 ? "0"+this.state.hours : this.state.hours}h:
+            {this.state.minutes < 10 ? "0"+this.state.minutes : this.state.minutes}m:
+            {this.state.seconds < 10 ? "0"+this.state.seconds : this.state.seconds}s
+          </div>
+
+          <Link to="/">
+            <Button variant="outlined">Set Timer</Button>
+          </Link>
+
         </div>
-
-        <Link to="/">
-          <Button variant="outlined">Set Timer</Button>
-        </Link>
-
       </div>
-    )
+    );
   }
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.setTimerReducer
+  reduxState: reduxState.setTimerReducer,
+  theme: reduxState.themeToggleReducer
 });
 
 export default connect(putReduxStateOnProps)(Timer);
