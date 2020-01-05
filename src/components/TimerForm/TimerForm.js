@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 class TimerForm extends Component{
 
@@ -11,13 +10,6 @@ class TimerForm extends Component{
     hours: 0,
     minutes: 0,
     seconds: 0,
-    dark: false
-  }
-
-  componentDidUpdate(prevProps){
-    if(this.props.theme !== prevProps.theme){
-      this.setState({dark: this.props.theme});
-    }
   }
 
   handleChange = (event, propName)=>{
@@ -51,8 +43,7 @@ class TimerForm extends Component{
 
   render(){
     return(
-      <div className={this.state.dark ? "dark-mode" : "light-mode"}>
-        <ThemeToggle />
+      <>
         <div className="form">
           <h1>SET TIMER</h1>
           <form onSubmit={this.handleSubmit}>
@@ -96,13 +87,9 @@ class TimerForm extends Component{
 
           </form>
         </div>
-      </div>
+      </>
     );
   }
 }
 
-const putReduxStateOnProps = (reduxState)=>({
-  theme: reduxState.themeToggleReducer
-});
-
-export default connect(putReduxStateOnProps)(TimerForm);
+export default connect()(TimerForm);
