@@ -12,8 +12,7 @@ This app is a basic countdown timer. Users can enter how many days, hours, minut
 - Material-UI
 
 ## Future Plans
-- Get rid of input up/down arrows
-- Add ability to countdown from a calendar date
+- Add ability to count down from a calendar date
 - Create theme toggle for Material-UI components
 
 If you have questions or concerns, email me at awren.nuit@gmail.com
