@@ -7,6 +7,7 @@ class ThemeToggle extends Component{
   handleToggle = () => {
     this.props.dispatch({type: `SET_THEME`});
   }
+  
 
   render(){
     return(

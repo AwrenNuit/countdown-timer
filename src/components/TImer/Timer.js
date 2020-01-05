@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import MuiTest from '../MuiTest/MuiTest';
 
 class Timer extends Component{
 
@@ -106,6 +107,7 @@ class Timer extends Component{
     return(
       <div className={this.state.dark ? "dark-mode" : "light-mode"}>
         <ThemeToggle />
+        <MuiTest />
         <div className="countdown-container">
           <div className="countdown">
             {this.state.days < 10 ? "0"+this.state.days : this.state.days}d:
