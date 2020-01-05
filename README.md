@@ -13,6 +13,6 @@ This app is a basic countdown timer. Users can enter how many days, hours, minut
 
 ## Future Plans
 - Add ability to count down from a calendar date
-- Create theme toggle for Material-UI components
+- Add alarm when timer reaches 0
 
 If you have questions or concerns, email me at awren.nuit@gmail.com
