@@ -113,7 +113,6 @@ class Timer extends Component{
   render(){
     return(
       <>
-      {JSON.stringify(this.state.alarm)}
         <div className="countdown-container">
           <div className="countdown">
             {this.state.days < 10 ? "0"+this.state.days : this.state.days}d:
