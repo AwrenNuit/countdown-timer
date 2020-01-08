@@ -9,7 +9,9 @@ class Timer extends Component{
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
+    alarm: false,
+    alarmDone: false
   }
 
   UNSAFE_componentWillMount(){
@@ -18,6 +20,17 @@ class Timer extends Component{
 
   componentDidMount(){
     this.interval = setInterval(() => this.countdown(), 1000);
+  }
+
+  componentDidUpdate(){
+    if(this.state.alarm){
+      let audio = new Audio('/sounds/alarm.mp3');
+      audio.play();
+      this.setState({
+        alarm: false,
+        alarmDone: true
+      });
+    }
   }
 
   componentWillUnmount(){
@@ -39,6 +52,9 @@ class Timer extends Component{
       // Handle seconds change
       if(seconds <= 0 && minutes <= 0 && hours <= 0 && days <= 0){
         seconds = 0;
+        if(!this.state.alarmDone){
+          this.setState({alarm: true});
+        }
       }
       else if(seconds < 0){
         seconds = 59;
@@ -97,6 +113,7 @@ class Timer extends Component{
   render(){
     return(
       <>
+      {JSON.stringify(this.state.alarm)}
         <div className="countdown-container">
           <div className="countdown">
             {this.state.days < 10 ? "0"+this.state.days : this.state.days}d:

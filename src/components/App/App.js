@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {HashRouter as Router, Route} from 'react-router-dom';
 import TimerForm from '../TimerForm/TimerForm';
-import Timer from '../TImer/Timer';
+import Timer from '../Timer/Timer';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import ToggleThemeLight from '../ToggleThemeLight/ToggleThemeLight';
 import ToggleThemeDark from '../ToggleThemeDark/ToggleThemeDark';
@@ -11,8 +11,8 @@ function App() {
 
   const [theme, setTheme] = useState({
     palette: {
-      type: `light`,
-      theme: `light-mode`
+      type: `dark`,
+      theme: `dark-mode`
     }
   });
 
