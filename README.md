@@ -15,6 +15,5 @@ View the full app here: https://mysterious-earth-03084.herokuapp.com/
 
 ## Future Plans
 - Add ability to count down from a calendar date
-- Add alarm when timer reaches 0
 
 If you have questions or concerns, email me at awren.nuit@gmail.com
